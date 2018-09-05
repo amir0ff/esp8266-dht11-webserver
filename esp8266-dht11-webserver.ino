@@ -10,7 +10,7 @@ const char* password = "passwd";
 WiFiServer server(80);
 
 // Initialize DHT sensor (pin_no, sensor type).
-DHT dht(3, DHT11);
+DHT dht(D5, DHT11);
 
 // Temporary variables
 static char celsiusTemp[7];
