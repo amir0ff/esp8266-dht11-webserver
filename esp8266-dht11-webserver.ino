@@ -69,7 +69,7 @@ void loop() {
           // Read temperature as Fahrenheit (isFahrenheit = true)
           float f = dht.readTemperature();
           // Check if any reads failed and exit early (to try again).
-          if (isnan(h) || isnan(t) || isnan(f)) {
+          if (isnan(hum) || isnan(temp) || isnan(f)) {
             Serial.println("Failed to read from DHT sensor!");
             strcpy(celsiusTemp, "Failed");
             strcpy(fahrenheitTemp, "Failed");
@@ -77,16 +77,16 @@ void loop() {
           }
           else {
             // Computes temperature values in Celsius + Fahrenheit and Humidity
-            float hic = dht.computeHeatIndex(t, h, false);
+            float hic = dht.computeHeatIndex(temp, hum, false);
             dtostrf(hic, 6, 2, celsiusTemp);
-            float hif = dht.computeHeatIndex(f, h);
+            float hif = dht.computeHeatIndex(f, hum);
             dtostrf(hif, 6, 2, fahrenheitTemp);
-            dtostrf(h, 6, 2, humidityTemp);
+            dtostrf(hum, 6, 2, humidityTemp);
             // You can delete the following Serial.print's, it's just for debugging purposes
             Serial.print("Humidity: ");
-            Serial.print(h);
+            Serial.print(hum);
             Serial.print(" %\t Temperature: ");
-            Serial.print(t);
+            Serial.print(temp);
             Serial.print(" *C ");
             Serial.print(f);
             Serial.print(" *F\t Heat index: ");
@@ -95,9 +95,9 @@ void loop() {
             Serial.print(hif);
             Serial.print(" *F");
             Serial.print("Humidity: ");
-            Serial.print(h);
+            Serial.print(hum);
             Serial.print(" %\t Temperature: ");
-            Serial.print(t);
+            Serial.print(temp);
             Serial.print(" *C ");
             Serial.print(f);
             Serial.print(" *F\t Heat index: ");
